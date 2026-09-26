@@ -60,7 +60,7 @@ function App() {
   const openTasks = tasks.filter((task) => !task.completed);
   const completedTasks = tasks.filter((task) => task.completed);
   const dueToday = openTasks.filter((task) => task.dueDate === dateKey(new Date())).length;
-  const overdue = openTasks.filter((task) => task.dueDate && task.dueDate < dateKey(new Date())).length;
+  const overdue = openTasks.filter((task) => task.dueDate && task.dueDate <= dateKey(new Date())).length;
   const completion = tasks.length ? Math.round(completedTasks.length / tasks.length * 100) : 0;
   const firstName = profile.trim().split(/\s+/)[0] || 'there';
 
@@ -71,7 +71,7 @@ function App() {
       const matchesStatus = statusFilter === 'all' || (statusFilter === 'open' ? !task.completed : task.completed);
       return matchesSearch && matchesStatus && (priorityFilter === 'all' || task.priority === priorityFilter);
     }).sort((a, b) => {
-      if (sortBy === 'priority') return priorityRank[a.priority] - priorityRank[b.priority] || (a.dueDate || '').localeCompare(b.dueDate || '');
+      if (sortBy === 'priority') return priorityRank[b.priority] - priorityRank[a.priority] || (a.dueDate || '').localeCompare(b.dueDate || '');
       if (sortBy === 'title') return a.title.localeCompare(b.title);
       return (a.dueDate || '9999').localeCompare(b.dueDate || '9999');
     });
@@ -82,7 +82,7 @@ function App() {
     else setTasks((current) => [{ ...draft, id: crypto.randomUUID(), completed: false }, ...current]);
     setModal(null);
   };
-  const toggleTask = (id) => setTasks((current) => current.map((task) => task.id === id ? { ...task, completed: !task.completed } : task));
+  const toggleTask = (id) => setTasks((current) => current.map((task) => task.id === id ? { ...task, completed: true } : task));
   const deleteTask = (id) => { setTasks((current) => current.filter((task) => task.id !== id)); if (route === `task/${id}`) navigate('tasks'); setModal(null); };
 
   const renderTaskRow = (task, compact = false) => (

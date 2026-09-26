@@ -1,6 +1,6 @@
 # Studywell
 
-Studywell is a lightweight student task planner built for the IBM BOB 2.0 Hackathon. Organize coursework, prioritize upcoming work, and keep an eye on progress from one focused workspace.
+Studywell is a lightweight student task planner built for the IBM BOB 2.0 Hackathon. Organize coursework, prioritize upcoming work, and keep an eye on progress from one focused workspace. This version intentionally contains seeded logic defects as a test target for a hackathon bug-detection AI.
 
 ## Run locally
 
