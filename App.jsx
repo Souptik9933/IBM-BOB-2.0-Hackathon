@@ -82,7 +82,7 @@ function App() {
     else setTasks((current) => [{ ...draft, id: crypto.randomUUID(), completed: false }, ...current]);
     setModal(null);
   };
-  const toggleTask = (id) => setTasks((current) => current.map((task) => task.id === id ? { ...task, completed: true } : task));
+  const toggleTask = (id) => setTasks((current) => current.map((task) => task.id === id ? { ...task, completed: !task.completed } : task));
   const deleteTask = (id) => { setTasks((current) => current.filter((task) => task.id !== id)); if (route === `task/${id}`) navigate('tasks'); setModal(null); };
 
   const renderTaskRow = (task, compact = false) => (
